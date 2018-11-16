@@ -11,7 +11,7 @@ public class GenerateUuid {
     @Autowired
     private UserRepository userRepository;
 
-    public String generateuuid(User user) {
+    public User generateuuid(User user) {
         return user.setUuid(generateuuid());
     }
 

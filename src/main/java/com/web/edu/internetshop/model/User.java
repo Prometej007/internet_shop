@@ -40,6 +40,10 @@ public class User extends DateCreate<User> implements UserDetails {
         return this;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
     public User setUuid(String uuid) {
         this.uuid = uuid;
         return this;
