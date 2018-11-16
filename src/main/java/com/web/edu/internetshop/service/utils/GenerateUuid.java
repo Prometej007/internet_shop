@@ -3,9 +3,11 @@ package com.web.edu.internetshop.service.utils;
 import com.web.edu.internetshop.model.User;
 import com.web.edu.internetshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 public class GenerateUuid {
 
     @Autowired
