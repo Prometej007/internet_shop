@@ -31,11 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
                         setDefaultAvailable(
                                 setDateCreate(
                                         category
-                                                .setDescription(dictionaryService.create(category.getDescription()))
                                                 .setImage(imageService.create(category.getImage()))
                                                 .setDescription(dictionaryService.create(category.getDescription()))
                                                 .setName(dictionaryService.create(category.getName()))
-                                        
+
                                 )
                         )
                 )

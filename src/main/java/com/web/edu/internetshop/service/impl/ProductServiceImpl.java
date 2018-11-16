@@ -3,6 +3,8 @@ package com.web.edu.internetshop.service.impl;
 import com.web.edu.internetshop.model.Product;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.ProductRepository;
+import com.web.edu.internetshop.service.DictionaryService;
+import com.web.edu.internetshop.service.ImageService;
 import com.web.edu.internetshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +16,27 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private DictionaryService dictionaryService;
+
+    @Autowired
+    private ImageService imageService;
+
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Product create(Product product) {
-        return null;
+        return save(
+                setLastModification(
+                        setDefaultAvailable(
+                                setDateCreate(
+                                        product
+                                                .setDescription(dictionaryService.create(product.getDescription()))
+                                                .setImage(imageService.create(product.getImage())))
+                                        .setName(dictionaryService.create(product.getName()))
+                        )
+                )
+
+        );
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
