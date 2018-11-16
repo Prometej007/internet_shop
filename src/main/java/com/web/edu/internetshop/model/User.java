@@ -93,4 +93,12 @@ public class User extends DateCreate<User> implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid( UUID uuid ) {
+        this.uuid = uuid;
+    }
 }
