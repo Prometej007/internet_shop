@@ -35,12 +35,14 @@ public class User extends DateCreate<User> implements UserDetails {
         return email;
     }
 
-    public void setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
+        return this;
     }
 
-    public void setUuid(String uuid) {
+    public User setUuid(String uuid) {
         this.uuid = uuid;
+        return this;
     }
 
     @Override
