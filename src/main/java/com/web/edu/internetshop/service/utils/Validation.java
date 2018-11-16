@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 public class Validation {
+
     public static void checkId(Long id) {
         if (id == null || id < 0)
             throw new RuntimeException("invalid id");
