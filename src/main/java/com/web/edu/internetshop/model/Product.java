@@ -3,13 +3,14 @@ package com.web.edu.internetshop.model;
 import com.web.edu.internetshop.model.enums.ProductType;
 import com.web.edu.internetshop.model.enums.SoftnessType;
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+@DynamicUpdate
 @Entity
-
 public class Product extends DateCreate<Product> {
 
 

@@ -1,6 +1,7 @@
 package com.web.edu.internetshop.model;
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.List;
 
+@DynamicUpdate
 @Entity
 public class Category extends DateCreate<Category> {
 

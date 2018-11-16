@@ -1,9 +1,11 @@
 package com.web.edu.internetshop.model;
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
+@DynamicUpdate
 @Entity
 @Table(indexes = {@Index(columnList = "id"), @Index(columnList = "path")})
 public class Image extends DateCreate<Image> {
