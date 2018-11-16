@@ -2,10 +2,12 @@ package com.web.edu.internetshop.model;
 
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+@DynamicUpdate
 @Entity
 public class Dictionary extends DateCreate<Dictionary> {
 
