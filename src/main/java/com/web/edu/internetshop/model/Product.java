@@ -27,7 +27,7 @@ public class Product extends DateCreate<Product> {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<SoftnessType> softness;
+    private List<SoftnessType> softnessTypes;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
@@ -52,6 +52,7 @@ public class Product extends DateCreate<Product> {
 
     private Boolean winterSummerOption;
 
+
     @Override
     public String toString() {
         return "Product{" +
@@ -59,7 +60,7 @@ public class Product extends DateCreate<Product> {
                 ", description=" + description +
                 ", image=" + image +
                 ", category=" + category +
-                ", softness=" + softness +
+                ", softnessTypes=" + softnessTypes +
                 ", productType=" + productType +
                 ", materials=" + materials +
                 ", height=" + height +
@@ -69,8 +70,7 @@ public class Product extends DateCreate<Product> {
                 ", price=" + price +
                 ", canBuy=" + canBuy +
                 ", news=" + news +
+                ", winterSummerOption=" + winterSummerOption +
                 '}';
     }
-
-
 }
