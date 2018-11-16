@@ -2,8 +2,9 @@ package com.web.edu.internetshop.model.utils.pattern;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.web.productservice.model.utils.parser.DateDeserializer;
-import com.web.productservice.model.utils.parser.DateSerializer;
+import com.web.edu.internetshop.model.utils.parser.DateDeserializer;
+import com.web.edu.internetshop.model.utils.parser.DateSerializer;
+
 
 import javax.persistence.MappedSuperclass;
 import java.sql.Timestamp;
