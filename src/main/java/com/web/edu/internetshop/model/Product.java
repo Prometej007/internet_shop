@@ -33,6 +33,8 @@ public class Product extends DateCreate<Product> {
     @ManyToMany
     private List<Materials> materials;
 
+    private String model;
+
     private Double height;
 
     private Double width;
@@ -49,6 +51,14 @@ public class Product extends DateCreate<Product> {
 
     private Boolean winterSummerOption;
 
+    public String getModel() {
+        return model;
+    }
+
+    public Product setModel(String model) {
+        this.model = model;
+        return this;
+    }
 
     @Override
     public String toString() {
