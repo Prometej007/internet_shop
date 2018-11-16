@@ -1,5 +1,6 @@
 package com.web.edu.internetshop.model;
 
+import com.web.edu.internetshop.model.enums.ProductType;
 import com.web.edu.internetshop.model.enums.SoftnessType;
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
 
