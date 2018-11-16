@@ -1,12 +1,18 @@
 package com.web.edu.internetshop.model;
 
+import com.web.edu.internetshop.model.enums.ProductType;
 import com.web.edu.internetshop.model.enums.SoftnessType;
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Product extends DateCreate<Product> {
 
 
@@ -18,108 +24,33 @@ public class Product extends DateCreate<Product> {
     private Image image;
     @ManyToOne
     private Category category;
+
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     private List<SoftnessType> softness;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private ProductType productType;
+
     @ManyToMany
     private List<Materials> materials;
 
     private Double height;
-    private Double weight;
+
+    private Double width;
+
     private Double length;
 
+    private Double maximumLoad;
+
+    private BigDecimal price;
 
     private Boolean canBuy;
+
     private Boolean news;
 
-
-    public Dictionary getName() {
-        return name;
-    }
-
-    public void setName(Dictionary name) {
-        this.name = name;
-    }
-
-    public Dictionary getDescription() {
-        return description;
-    }
-
-    public void setDescription(Dictionary description) {
-        this.description = description;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<SoftnessType> getSoftness() {
-        return softness;
-    }
-
-    public void setSoftness(List<SoftnessType> softness) {
-        this.softness = softness;
-    }
-
-    public List<Materials> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<Materials> materials) {
-        this.materials = materials;
-    }
-
-    public Double getHeight() {
-        return height;
-    }
-
-    public void setHeight(Double height) {
-        this.height = height;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    public Double getLength() {
-        return length;
-    }
-
-    public void setLength(Double length) {
-        this.length = length;
-    }
-
-    public Boolean getCanBuy() {
-        return canBuy;
-    }
-
-    public void setCanBuy(Boolean canBuy) {
-        this.canBuy = canBuy;
-    }
-
-    public Boolean getNews() {
-        return news;
-    }
-
-    public void setNews(Boolean news) {
-        this.news = news;
-    }
+    private Boolean winterSummerOption;
 
     @Override
     public String toString() {
@@ -129,10 +60,13 @@ public class Product extends DateCreate<Product> {
                 ", image=" + image +
                 ", category=" + category +
                 ", softness=" + softness +
+                ", productType=" + productType +
                 ", materials=" + materials +
                 ", height=" + height +
-                ", weight=" + weight +
+                ", width=" + width +
                 ", length=" + length +
+                ", maximumLoad=" + maximumLoad +
+                ", price=" + price +
                 ", canBuy=" + canBuy +
                 ", news=" + news +
                 '}';

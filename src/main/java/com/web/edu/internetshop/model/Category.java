@@ -1,6 +1,8 @@
 package com.web.edu.internetshop.model;
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Category extends DateCreate<Category> {
 
     @OneToOne
@@ -33,43 +37,4 @@ public class Category extends DateCreate<Category> {
                 '}';
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public Dictionary getName() {
-        return name;
-    }
-
-    public void setName(Dictionary name) {
-        this.name = name;
-    }
-
-    public Dictionary getDescription() {
-        return description;
-    }
-
-    public void setDescription(Dictionary description) {
-        this.description = description;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 }

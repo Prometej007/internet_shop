@@ -2,11 +2,15 @@ package com.web.edu.internetshop.model;
 
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@Getter
+@Setter
 public class Dictionary extends DateCreate<Dictionary> {
 
     @Column(columnDefinition = "TEXT")
@@ -25,27 +29,4 @@ public class Dictionary extends DateCreate<Dictionary> {
                 '}';
     }
 
-    public String getValueEn() {
-        return valueEn;
-    }
-
-    public void setValueEn(String valueEn) {
-        this.valueEn = valueEn;
-    }
-
-    public String getValueRu() {
-        return valueRu;
-    }
-
-    public void setValueRu(String valueRu) {
-        this.valueRu = valueRu;
-    }
-
-    public String getValueUa() {
-        return valueUa;
-    }
-
-    public void setValueUa(String valueUa) {
-        this.valueUa = valueUa;
-    }
 }

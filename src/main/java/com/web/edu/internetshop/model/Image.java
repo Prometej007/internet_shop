@@ -1,11 +1,15 @@
 package com.web.edu.internetshop.model;
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(indexes = {@Index(columnList = "id"), @Index(columnList = "path")})
+@Getter
+@Setter
 public class Image extends DateCreate<Image> {
 
     private String path;
@@ -27,35 +31,6 @@ public class Image extends DateCreate<Image> {
                 '}';
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Dictionary getAlt() {
-        return alt;
-    }
-
-    public void setAlt(Dictionary alt) {
-        this.alt = alt;
-    }
-
-    public Dictionary getTitle() {
-        return title;
-    }
-
-    public void setTitle(Dictionary title) {
-        this.title = title;
-    }
 }
+
+

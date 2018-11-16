@@ -1,11 +1,16 @@
 package com.web.edu.internetshop.model;
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
+@Getter
+@Setter
 public class Materials extends DateCreate<Materials> {
 
     @OneToOne
@@ -24,27 +29,5 @@ public class Materials extends DateCreate<Materials> {
                 '}';
     }
 
-    public Dictionary getName() {
-        return name;
-    }
 
-    public void setName(Dictionary name) {
-        this.name = name;
-    }
-
-    public Dictionary getDescription() {
-        return description;
-    }
-
-    public void setDescription(Dictionary description) {
-        this.description = description;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
 }
