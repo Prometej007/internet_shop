@@ -23,11 +23,11 @@ public class Product extends DateCreate<Product> {
     @ManyToOne
     private Category category;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @ElementCollection(fetch = FetchType.EAGER)
     private List<SoftnessType> softnessTypes;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private ProductType productType;
 
     @ManyToMany
