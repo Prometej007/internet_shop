@@ -31,31 +31,35 @@ public class Image extends DateCreate<Image> {
         return path;
     }
 
-    public void setPath(String path) {
+    public Image setPath(String path) {
         this.path = path;
+        return this;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public Image setContent(String content) {
         this.content = content;
+        return this;
     }
 
     public Dictionary getAlt() {
         return alt;
     }
 
-    public void setAlt(Dictionary alt) {
+    public Image setAlt(Dictionary alt) {
         this.alt = alt;
+        return this;
     }
 
     public Dictionary getTitle() {
         return title;
     }
 
-    public void setTitle(Dictionary title) {
+    public Image setTitle(Dictionary title) {
         this.title = title;
+        return this;
     }
 }
