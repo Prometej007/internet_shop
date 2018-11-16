@@ -17,7 +17,7 @@ public class User extends DateCreate<User> implements UserDetails {
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
-    private UUID uuid;
+    private String uuid;
 
     @Override
     public String toString() {
@@ -29,6 +29,15 @@ public class User extends DateCreate<User> implements UserDetails {
                 ", isCredentialsNonExpired=" + isCredentialsNonExpired +
                 ", isEnabled=" + isEnabled +
                 '}';
+    }
+
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getEmail() {
