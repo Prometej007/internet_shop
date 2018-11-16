@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 public class User extends DateCreate<User> implements UserDetails {
@@ -16,7 +17,7 @@ public class User extends DateCreate<User> implements UserDetails {
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
-
+    private UUID uuid;
 
     @Override
     public String toString() {
