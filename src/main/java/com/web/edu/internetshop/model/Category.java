@@ -37,39 +37,44 @@ public class Category extends DateCreate<Category> {
         return image;
     }
 
-    public void setImage(Image image) {
+    public Category setImage(Image image) {
         this.image = image;
+        return this;
     }
 
     public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(Integer order) {
+    public Category setOrder(Integer order) {
         this.order = order;
+        return this;
     }
 
     public Dictionary getName() {
         return name;
     }
 
-    public void setName(Dictionary name) {
+    public Category setName(Dictionary name) {
         this.name = name;
+        return this;
     }
 
     public Dictionary getDescription() {
         return description;
     }
 
-    public void setDescription(Dictionary description) {
+    public Category setDescription(Dictionary description) {
         this.description = description;
+        return this;
     }
 
     public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public Category setProducts(List<Product> products) {
         this.products = products;
+        return this;
     }
 }

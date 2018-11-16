@@ -60,4 +60,5 @@ public class Image extends DateCreate<Image> {
         this.title = title;
         return this;
     }
+
 }

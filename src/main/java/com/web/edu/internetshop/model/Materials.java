@@ -50,4 +50,5 @@ public class Materials extends DateCreate<Materials> {
         this.image = image;
         return this;
     }
+
 }

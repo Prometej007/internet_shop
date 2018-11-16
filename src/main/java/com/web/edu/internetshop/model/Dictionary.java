@@ -29,23 +29,26 @@ public class Dictionary extends DateCreate<Dictionary> {
         return valueEn;
     }
 
-    public void setValueEn(String valueEn) {
+    public Dictionary setValueEn(String valueEn) {
         this.valueEn = valueEn;
+        return this;
     }
 
     public String getValueRu() {
         return valueRu;
     }
 
-    public void setValueRu(String valueRu) {
+    public Dictionary setValueRu(String valueRu) {
         this.valueRu = valueRu;
+        return this;
     }
 
     public String getValueUa() {
         return valueUa;
     }
 
-    public void setValueUa(String valueUa) {
+    public Dictionary setValueUa(String valueUa) {
         this.valueUa = valueUa;
+        return this;
     }
 }
