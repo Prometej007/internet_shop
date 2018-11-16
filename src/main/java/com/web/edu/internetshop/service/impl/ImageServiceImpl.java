@@ -4,6 +4,7 @@ import com.web.edu.internetshop.InternetShopApplication;
 import com.web.edu.internetshop.model.Image;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.ImageRepository;
+import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.ImageService;
 import com.web.edu.internetshop.service.exceptions.SystemVariableNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,15 @@ public class ImageServiceImpl implements ImageService {
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Image create(Image image) {
-        return save(setLastModification(image.setPath(build(image))));
+        return save(
+                setLastModification(
+                        setDefaultAvailable(
+                                setDateCreate(
+                                        image.setPath(build(image))
+                                )
+                        )
+                )
+        );
     }
 
     @Transactional(rollbackFor = RuntimeException.class)

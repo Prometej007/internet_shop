@@ -19,7 +19,15 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Dictionary create(Dictionary dictionary) {
-        return save(setLastModification(dictionary));
+        return save(
+                setLastModification(
+                        setDefaultAvailable(
+                                setDateCreate(
+                                        dictionary
+                                )
+                        )
+                )
+        );
     }
 
     @Transactional(rollbackFor = RuntimeException.class)

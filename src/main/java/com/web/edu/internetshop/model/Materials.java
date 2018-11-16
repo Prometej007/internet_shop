@@ -28,23 +28,26 @@ public class Materials extends DateCreate<Materials> {
         return name;
     }
 
-    public void setName(Dictionary name) {
+    public Materials setName(Dictionary name) {
         this.name = name;
+        return this;
     }
 
     public Dictionary getDescription() {
         return description;
     }
 
-    public void setDescription(Dictionary description) {
+    public Materials setDescription(Dictionary description) {
         this.description = description;
+        return this;
     }
 
     public Image getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public Materials setImage(Image image) {
         this.image = image;
+        return this;
     }
 }

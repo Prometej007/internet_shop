@@ -12,10 +12,8 @@ public class Image extends DateCreate<Image> {
     @Column(columnDefinition = "LONGTEXT")
     private String content;
 
-    @OneToOne
-    private Dictionary alt;
-    @OneToOne
-    private Dictionary title;
+    private String alt;
+    private String title;
 
     @Override
     public String toString() {
@@ -45,20 +43,20 @@ public class Image extends DateCreate<Image> {
         return this;
     }
 
-    public Dictionary getAlt() {
+    public String getAlt() {
         return alt;
     }
 
-    public Image setAlt(Dictionary alt) {
+    public Image setAlt(String alt) {
         this.alt = alt;
         return this;
     }
 
-    public Dictionary getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public Image setTitle(Dictionary title) {
+    public Image setTitle(String title) {
         this.title = title;
         return this;
     }
