@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import static java.util.Optional.ofNullable;
+
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -14,6 +16,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserDetails userDetails = null;
+        if (ofNullable(userDetails = userRepository.findByEmail(s)).isPresent()) {
+            return userDetails;
+        }
         return null;
     }
 }
