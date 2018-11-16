@@ -27,7 +27,6 @@ public class Product extends DateCreate<Product> {
     private List<SoftnessType> softnessTypes;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
     private ProductType productType;
 
     @ManyToMany

@@ -15,6 +15,9 @@ public class Materials extends DateCreate<Materials> {
     @OneToOne
     private Image image;
 
+    @OneToOne
+    private Product product;
+
     @Override
     public String toString() {
         return "Materials{" +
@@ -22,6 +25,15 @@ public class Materials extends DateCreate<Materials> {
                 ", description=" + description +
                 ", image=" + image +
                 '}';
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Materials setProduct(Product product) {
+        this.product = product;
+        return this;
     }
 
     public Dictionary getName() {

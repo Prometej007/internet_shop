@@ -14,6 +14,8 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import static java.util.Optional.ofNullable;
+
 /**
  * Created by danul on 27.04.2017.
  */
@@ -43,6 +45,8 @@ public class ApplicationWebMvcConfig extends WebMvcConfigurerAdapter {
 
 
     private String mod(String str) {
+        if(!ofNullable(str).isPresent())
+            return "C:\\file.home/";
         if (!(str.charAt(str.length() - 1) == '\\' || str.charAt(str.length() - 1) == '/'))
             return str+"/";
         else
