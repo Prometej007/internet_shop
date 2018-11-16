@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import java.util.Collection;
-import java.util.UUID;
 
 @Entity
 public class User extends DateCreate<User> implements UserDetails {
@@ -32,14 +31,6 @@ public class User extends DateCreate<User> implements UserDetails {
     }
 
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public String setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -48,24 +39,8 @@ public class User extends DateCreate<User> implements UserDetails {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        isAccountNonExpired = accountNonExpired;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        isAccountNonLocked = accountNonLocked;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        isCredentialsNonExpired = credentialsNonExpired;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     @Override
@@ -78,6 +53,10 @@ public class User extends DateCreate<User> implements UserDetails {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String getUsername() {
         return email;
@@ -88,9 +67,17 @@ public class User extends DateCreate<User> implements UserDetails {
         return isAccountNonExpired;
     }
 
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
     @Override
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
     }
 
     @Override
@@ -98,16 +85,18 @@ public class User extends DateCreate<User> implements UserDetails {
         return isCredentialsNonExpired;
     }
 
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
     @Override
     public boolean isEnabled() {
         return isEnabled;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
-    public void setUuid( UUID uuid ) {
-        this.uuid = uuid;
-    }
+
 }
