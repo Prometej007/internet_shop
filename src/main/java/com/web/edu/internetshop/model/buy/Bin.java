@@ -22,12 +22,21 @@ public class Bin extends DateCreate<Bin> {
     private String order;
     private BigDecimal price;
     private BigDecimal discount;
-
+    private String comment;
     @OneToMany(mappedBy = "bin")
     private List<BinStatus> statuses;
 
     @ManyToOne
     private PromoCode promoCode;
+
+    public String getComment() {
+        return comment;
+    }
+
+    public Bin setComment(String comment) {
+        this.comment = comment;
+        return this;
+    }
 
     public BigDecimal getDiscount() {
         return discount;
