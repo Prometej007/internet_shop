@@ -25,7 +25,6 @@ public class Bin extends DateCreate<Bin> {
     @OneToMany(mappedBy = "bin")
     private List<BinStatus> statuses;
 
-
     @ManyToOne
     private PromoCode promoCode;
 

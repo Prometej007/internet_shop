@@ -21,6 +21,16 @@ public class PromoCode extends DateCreate<PromoCode> {
     private Long maxCount;
     @OneToMany(mappedBy = "promoCode")
     private List<Bin> bins;
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public PromoCode setCode(String code) {
+        this.code = code;
+        return this;
+    }
 
     public List<Product> getProduct() {
         return product;
