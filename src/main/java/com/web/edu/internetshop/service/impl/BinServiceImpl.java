@@ -45,7 +45,9 @@ public class BinServiceImpl implements BinService {
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Bin create(Bin bin, Principal principal) {
-        bin.getUser().setEmail(principal.getName());
+        if (ofNullable(principal).isPresent())
+            if (ofNullable(principal.getName()).isPresent())
+                bin.getUser().setEmail(principal.getName());
         return create(bin);
     }
 
