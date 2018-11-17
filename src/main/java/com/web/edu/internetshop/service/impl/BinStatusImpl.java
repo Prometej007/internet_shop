@@ -37,7 +37,7 @@ public class BinStatusImpl implements BinStatusService {
 
     @Override
     public BinStatus create(Bin bin) {
-        return create(bin);//todo
+        return create(BinStatusType.NEW_ORDER, bin);
     }
 
     @Override
