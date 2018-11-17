@@ -13,18 +13,24 @@ public class PromoCodeValidator implements
         ConstraintValidator<PromoCodeConstraint, String> {
 
 
+    PromoCodeConstraint promoCodeConstraint;
     @Autowired
     private PromoCodeService promoCodeService;
 
     @Override
     public void initialize(PromoCodeConstraint promoCodeConstraint) {
-
+        this.promoCodeConstraint = promoCodeConstraint;
     }
 
     @Override
     public boolean isValid(String promoCodeConstraint,
                            ConstraintValidatorContext cxt) {
-        return promoCodeConstraint != null && !ofNullable(promoCodeService.findByCode(promoCodeConstraint)).isPresent();
+        if (!this.promoCodeConstraint.exist()) {
+            return promoCodeConstraint != null && ofNullable(promoCodeService.findByCode(promoCodeConstraint)).isPresent();
+        } else {
+            return promoCodeConstraint != null && !ofNullable(promoCodeService.findByCode(promoCodeConstraint)).isPresent();
+
+        }
     }
 
 }
