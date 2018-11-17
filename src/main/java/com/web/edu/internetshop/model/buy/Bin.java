@@ -1,5 +1,6 @@
 package com.web.edu.internetshop.model.buy;
 
+import com.web.edu.internetshop.model.PromoCode;
 import com.web.edu.internetshop.model.User;
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
 import org.hibernate.annotations.DynamicUpdate;
@@ -23,6 +24,19 @@ public class Bin extends DateCreate<Bin> {
 
     @OneToMany(mappedBy = "bin")
     private List<BinStatus> statuses;
+
+
+    @ManyToOne
+    private PromoCode promoCode;
+
+    public PromoCode getPromoCode() {
+        return promoCode;
+    }
+
+    public Bin setPromoCode(PromoCode promoCode) {
+        this.promoCode = promoCode;
+        return this;
+    }
 
     public List<BinStatus> getStatuses() {
         return statuses;
