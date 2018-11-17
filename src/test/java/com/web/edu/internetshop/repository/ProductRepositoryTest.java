@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -50,6 +52,10 @@ public class ProductRepositoryTest extends Assert {
                         .setSoftnessTypes(Collections.singletonList(SoftnessType.HARD))
                 .setProductType(ProductType.DOUBLE_SIDED)
                 .setWinterSummerOption(true).setPrice(new BigDecimal(100))
+                .setHeight(10D)
+                .setWidth(10D)
+                .setLength(10D)
+                .setMaximumLoad(10D)
         );
         this.product=productRepository.findOne(product.getId());
     }
@@ -60,14 +66,259 @@ public class ProductRepositoryTest extends Assert {
         System.err.println(product.getId());
         System.err.println(product.getCategory().getId());
         System.err.println(product.getMaterials().size());
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,null,
+                null,null,
+                null,null,
+                null,null
+        ).get(0).getId(), product.getId());
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,null,
+                null,null,
+                null,null,
+                null,10D
+        ).get(0).getId(), product.getId());
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,null,
+                null,null,
+                null,null,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,null,
+                null,null,
+                null,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,null,
+                null,null,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,null,
+                null,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,null,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                null,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(product.getCategory().getId()),
+                Collections.singletonList(-1L),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(product.getCategory().getId()),
+                product.getMaterials().stream().map(Materials::getId).collect(toList()),
+                Collections.singletonList(-1),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(product.getCategory().getId()),
+                product.getMaterials().stream().map(Materials::getId).collect(toList()),
+                Collections.singletonList(SoftnessType.HARD.ordinal()),
+                Collections.singletonList(-1),
+                null
+                ,null,null,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(product.getCategory().getId()),
+                product.getMaterials().stream().map(Materials::getId).collect(toList()),
+                Collections.singletonList(SoftnessType.HARD.ordinal()),
+                Collections.singletonList(product.getProductType().ordinal()),
+                null
+                ,null,null,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+
         assertEquals(productRepository.filter(
                 Collections.singletonList(product.getCategory().getId()),
                 product.getMaterials().stream().map(Materials::getId).collect(toList()),
                 Collections.singletonList(SoftnessType.HARD.ordinal()),
                 Collections.singletonList(product.getProductType().ordinal()),
                 product.getWinterSummerOption()
-,new BigDecimal(0),new BigDecimal(1000)
-        ).size(), 1);
+                ,null,null,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(product.getCategory().getId()),
+                product.getMaterials().stream().map(Materials::getId).collect(toList()),
+                Collections.singletonList(SoftnessType.HARD.ordinal()),
+                Collections.singletonList(product.getProductType().ordinal()),
+                product.getWinterSummerOption()
+                ,new BigDecimal(0),null,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
+
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(product.getCategory().getId()),
+                product.getMaterials().stream().map(Materials::getId).collect(toList()),
+                Collections.singletonList(SoftnessType.HARD.ordinal()),
+                Collections.singletonList(product.getProductType().ordinal()),
+                product.getWinterSummerOption()
+                ,new BigDecimal(0),new BigDecimal(1000),
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D
+        ).get(0).getId(), product.getId());
+
     }
+
+
+
+    @Test
+    public void filterWithPage() {
+
+        assertEquals(productRepository.filter(
+                Collections.singletonList(product.getCategory().getId()),
+                product.getMaterials().stream().map(Materials::getId).collect(toList()),
+                Collections.singletonList(SoftnessType.HARD.ordinal()),
+                Collections.singletonList(product.getProductType().ordinal()),
+                product.getWinterSummerOption()
+                ,new BigDecimal(0),new BigDecimal(1000),
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                0D,10D,
+                new PageRequest(0,1, Sort.Direction.ASC,"id")
+        ).getContent().get(0).getId(), product.getId());
+
+    }
+
+
 
 }
