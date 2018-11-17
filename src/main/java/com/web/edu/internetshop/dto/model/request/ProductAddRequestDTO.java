@@ -46,8 +46,6 @@ public class ProductAddRequestDTO {
     @NotNull
     private Boolean canBuy;
     @NotNull
-    private Boolean available;
-    @NotNull
     private Boolean news;
     @NotNull
     private Boolean winterSummerOption;
@@ -162,14 +160,6 @@ public class ProductAddRequestDTO {
 
     public void setCanBuy(Boolean canBuy) {
         this.canBuy = canBuy;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 
     public Boolean getNews() {
