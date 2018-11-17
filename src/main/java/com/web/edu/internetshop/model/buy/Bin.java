@@ -25,9 +25,28 @@ public class Bin extends DateCreate<Bin> {
     private String comment;
     @OneToMany(mappedBy = "bin")
     private List<BinStatus> statuses;
-
+    private String city;
+    private String address;
     @ManyToOne
     private PromoCode promoCode;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Bin setAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Bin setCity(String city) {
+        this.city = city;
+        return this;
+    }
 
     public String getComment() {
         return comment;
