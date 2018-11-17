@@ -20,7 +20,7 @@ public class Materials extends DateCreate<Materials> {
 
     @Override
     public String toString() {
-        return "Materials{" +
+        return "MaterialsDto{" +
                 "name=" + name +
                 ", description=" + description +
                 ", image=" + image +
