@@ -70,4 +70,34 @@ public class ProductServiceImpl implements ProductService {
     public Product lastModification(LastModification<Product> lastModification) {
         return save(setLastModification(findOne(lastModification.getId())));
     }
+
+    @Override
+    public Boolean isAvailable(Product product) {
+        Product product1 = findOne(product);
+        product1.setAvailable(true);
+        save(product1);
+        return true;
+    }
+
+    @Override
+    public Boolean notAvailable(Product product) {
+        Product product1 = findOne(product);
+        product1.setAvailable(false);
+        save(product1);
+        return true;
+    }
+
+    @Override
+    public Boolean unlockBuy(Product product) {
+        Product product1 = findOne(product);
+        product1.setCanBuy(true);
+        return true;
+    }
+
+    @Override
+    public Boolean lockBuy(Product product) {
+        Product product1 = findOne(product);
+        product1.setCanBuy(false);
+        return true;
+    }
 }
