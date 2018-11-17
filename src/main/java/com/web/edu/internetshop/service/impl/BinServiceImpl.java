@@ -97,13 +97,15 @@ public class BinServiceImpl implements BinService {
     }
 
     private BigDecimal price(Product product, PromoCode promoCode) {
-        if (ofNullable(promoCode).isPresent())
-            return product.getPrice()
+        if (ofNullable(promoCode).isPresent()){
+            if(promoCode.getProduct().stream().anyMatch(product1 -> product1.getId().equals(product.getId())))
+                return product.getPrice()
                     .remainder(
                             product.getPrice()
                                     .divide(new BigDecimal(100)
                                             .multiply(new BigDecimal(promoCode.getDiscount())), 2, 0));
-        else
+        }
+
             return product.getPrice();
     }
 
