@@ -5,7 +5,7 @@ import com.web.edu.internetshop.model.enums.BinStatusType;
 
 import javax.validation.constraints.NotNull;
 
-public class BinStatus {
+public class BinStatusAddRequestDTO {
 
     @NotNull
     private BinStatusType type;
