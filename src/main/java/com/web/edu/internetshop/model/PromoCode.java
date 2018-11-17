@@ -22,6 +22,17 @@ public class PromoCode extends DateCreate<PromoCode> {
     @OneToMany(mappedBy = "promoCode")
     private List<Bin> bins;
     private String code;
+    //0-100%
+private Float discount;
+
+    public Float getDiscount() {
+        return discount;
+    }
+
+    public PromoCode setDiscount(Float discount) {
+        this.discount = discount;
+        return this;
+    }
 
     public String getCode() {
         return code;

@@ -6,18 +6,31 @@ import com.web.edu.internetshop.model.buy.ItemBin;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.BinRepository;
 import com.web.edu.internetshop.service.BinService;
+import com.web.edu.internetshop.service.ItemBinService;
+import com.web.edu.internetshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static java.util.Optional.ofNullable;
 
 @Service
 public class BinServiceImpl implements BinService {
 
     @Autowired
     private BinRepository binRepository;
+    @Autowired
+    private ProductService productService;
+
+    public static void main(String[] args) {
+        Float f = new Float(3.99999);
+        System.out.println(new BigDecimal(10).divide(new BigDecimal(3), 2, 0));
+        System.out.println(new BigDecimal(10).multiply(new BigDecimal(f).setScale(2, 0)));
+    }
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
@@ -26,11 +39,32 @@ public class BinServiceImpl implements BinService {
     }
 
     private BigDecimal price(Bin bin) {
-        return null;
+        AtomicReference<BigDecimal> reference = new AtomicReference<>(new BigDecimal(0));
+
+        bin.getItemBins().forEach(itemBin -> {
+            reference.updateAndGet(bigDecimal -> bigDecimal.add(price(itemBin, bin.getPromoCode())));
+        });
+
+        return reference.get();
     }
 
     private BigDecimal price(ItemBin itemBin, PromoCode promoCode) {
-        return null;
+        AtomicReference<BigDecimal> reference = new AtomicReference<>(new BigDecimal(0));
+
+        itemBin.setPricePerOne(productService.findOne(itemBin.getProduct()).getPrice());
+
+        if (ofNullable(promoCode).isPresent()) {
+            itemBin.setPricePerOne(
+                    itemBin.getPricePerOne()
+                            .remainder(
+                                    itemBin.getPricePerOne()
+                                            .divide(new BigDecimal(100)
+                                                    .multiply(new BigDecimal(promoCode.getDiscount())), 2, 0))
+            );
+        }
+//        reference.updateAndGet(bigDecimal -> bigDecimal.divide().)
+
+        return reference.get();
     }
 
 

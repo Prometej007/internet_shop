@@ -21,12 +21,22 @@ public class Bin extends DateCreate<Bin> {
     @Column(name = "_order")
     private String order;
     private BigDecimal price;
+    private BigDecimal discount;
 
     @OneToMany(mappedBy = "bin")
     private List<BinStatus> statuses;
 
     @ManyToOne
     private PromoCode promoCode;
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public Bin setDiscount(BigDecimal discount) {
+        this.discount = discount;
+        return this;
+    }
 
     public PromoCode getPromoCode() {
         return promoCode;
