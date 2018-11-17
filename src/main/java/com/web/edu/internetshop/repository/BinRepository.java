@@ -9,4 +9,5 @@ public interface BinRepository extends JpaRepository<Bin,Long> {
 
     Long countByPromoCode_Code(String promoCode_code);
 
+
 }

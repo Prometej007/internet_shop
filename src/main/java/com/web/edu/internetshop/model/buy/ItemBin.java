@@ -1,6 +1,7 @@
 package com.web.edu.internetshop.model.buy;
 
 import com.web.edu.internetshop.model.product.Product;
+import com.web.edu.internetshop.model.utils.pattern.DateCreate;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 
 @Entity
 @DynamicUpdate
-public class ItemBin extends LastModification<ItemBin> {
+public class ItemBin extends DateCreate <ItemBin> {
     @OneToOne
     private Product product;
     @ManyToOne
