@@ -26,11 +26,6 @@ public class BinServiceImpl implements BinService {
     @Autowired
     private ProductService productService;
 
-    public static void main(String[] args) {
-        Float f = new Float(3.99999);
-        System.out.println(new BigDecimal(10).divide(new BigDecimal(3), 2, 0));
-        System.out.println(new BigDecimal(10).multiply(new BigDecimal(f).setScale(2, 0)));
-    }
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
@@ -62,9 +57,9 @@ public class BinServiceImpl implements BinService {
                                                     .multiply(new BigDecimal(promoCode.getDiscount())), 2, 0))
             );
         }
-//        reference.updateAndGet(bigDecimal -> bigDecimal.divide().)
+        reference.updateAndGet(bigDecimal -> bigDecimal.multiply(new BigDecimal(itemBin.getCount())));
 
-        return reference.get();
+        return reference.get().setScale(2, 0);
     }
 
 

@@ -16,20 +16,20 @@ import java.util.List;
 public class CategoryAddRequestDTO {
 
     @NotNull
-    private ImageAddRequestDto image;
+    private ImageAddRequestDTO image;
     @NotNull
     @Min(0)
     private Integer order;
     @NotNull
-    private DictionaryAddRequestDto name;
+    private DictionaryAddRequestDTO name;
     @NotNull
-    private DictionaryAddRequestDto description;
+    private DictionaryAddRequestDTO description;
 
-    public ImageAddRequestDto getImage() {
+    public ImageAddRequestDTO getImage() {
         return image;
     }
 
-    public CategoryAddRequestDTO setImage(ImageAddRequestDto image) {
+    public CategoryAddRequestDTO setImage(ImageAddRequestDTO image) {
         this.image = image;
         return this;
     }
@@ -43,20 +43,20 @@ public class CategoryAddRequestDTO {
         return this;
     }
 
-    public DictionaryAddRequestDto getName() {
+    public DictionaryAddRequestDTO getName() {
         return name;
     }
 
-    public CategoryAddRequestDTO setName(DictionaryAddRequestDto name) {
+    public CategoryAddRequestDTO setName(DictionaryAddRequestDTO name) {
         this.name = name;
         return this;
     }
 
-    public DictionaryAddRequestDto getDescription() {
+    public DictionaryAddRequestDTO getDescription() {
         return description;
     }
 
-    public CategoryAddRequestDTO setDescription(DictionaryAddRequestDto description) {
+    public CategoryAddRequestDTO setDescription(DictionaryAddRequestDTO description) {
         this.description = description;
         return this;
     }
