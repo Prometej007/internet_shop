@@ -27,4 +27,5 @@ public interface ProductService extends GrudOperations<Product> {
     Boolean setAvailability( Long productId, boolean available );
     Boolean unlockBuy(Product product);
     Boolean lockBuy(Product product);
+
 }
