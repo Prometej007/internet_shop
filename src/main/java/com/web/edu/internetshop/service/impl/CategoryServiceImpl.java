@@ -7,10 +7,12 @@ import com.web.edu.internetshop.service.CategoryService;
 import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired

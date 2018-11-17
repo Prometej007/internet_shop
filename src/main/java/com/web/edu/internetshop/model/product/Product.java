@@ -47,6 +47,8 @@ public class Product extends DateCreate<Product> {
 
     private Boolean canBuy;
 
+    private Boolean available;
+
     private Boolean news;
 
     private Boolean winterSummerOption;
@@ -57,6 +59,18 @@ public class Product extends DateCreate<Product> {
 
     public Product setModel(String model) {
         this.model = model;
+        return this;
+    }
+
+
+    @Override
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    @Override
+    public Product setAvailable(Boolean available) {
+        this.available = available;
         return this;
     }
 
