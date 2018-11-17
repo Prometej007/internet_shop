@@ -17,7 +17,7 @@ public class ProductAddRequestDTO {
     @NotNull
     private DictionaryAddRequestDTO description;
     @NotNull
-    private DictionaryAddRequestDTO image;
+    private ImageAddRequestDTO image;
     @NotNull
     private IdDto category;
     @NotNull
@@ -68,11 +68,11 @@ public class ProductAddRequestDTO {
         this.description = description;
     }
 
-    public DictionaryAddRequestDTO getImage() {
+    public ImageAddRequestDTO getImage() {
         return image;
     }
 
-    public void setImage(DictionaryAddRequestDTO image) {
+    public void setImage(ImageAddRequestDTO image) {
         this.image = image;
     }
 
