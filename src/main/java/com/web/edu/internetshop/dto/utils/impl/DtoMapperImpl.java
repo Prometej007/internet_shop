@@ -3,7 +3,9 @@ package com.web.edu.internetshop.dto.utils.impl;
 import com.web.edu.internetshop.dto.utils.DtoMapper;
 import com.web.edu.internetshop.dto.utils.annotations.Dto;
 import com.web.edu.internetshop.dto.utils.annotations.EnableMapper;
+
 import java.util.logging.Logger;
+
 import org.reflections.Reflections;
 
 import javax.persistence.Entity;
@@ -49,15 +51,7 @@ public class DtoMapperImpl implements DtoMapper {
                     .filter(method1 -> method1.getName().contains("set"))
                     .forEach(method1 -> {
                         try {
-                            if (!method1.getParameterTypes()[0].equals(List.class) && (method1.getParameterTypes()[0].getSuperclass().equals(Enum.class)
-                                    || method1.getParameterTypes()[0].equals(Enum.class)
-                                    || method1.getParameterTypes()[0].equals(String.class)
-                                    || method1.getParameterTypes()[0].equals(Character.class)
-                                    || method1.getParameterTypes()[0].getSuperclass().equals(Number.class)
-                                    || method1.getParameterTypes()[0].equals(LocalDate.class)
-                                    || method1.getParameterTypes()[0].equals(Timestamp.class)
-                                    || method1.getParameterTypes()[0].equals(LocalDateTime.class)
-                                    || method1.getParameterTypes()[0].equals(Boolean.class))) {
+                            if (!method1.getParameterTypes()[0].equals(List.class) && valid(method1)) {
                                 Arrays.stream(dtoObject.getClass().getMethods())
                                         .filter(method -> method.getName().contains("get"))
                                         .filter(method -> method.getName().replace("get", "").equals(method1.getName().replace("set", "")))
@@ -76,15 +70,15 @@ public class DtoMapperImpl implements DtoMapper {
                                         .filter(method -> method.getName().replace("get", "").equals(method1.getName().replace("set", "")))
                                         .forEach(method -> {
                                             try {
-                                                if(method != null) {
+                                                if (method != null) {
                                                     if (method1.getParameterTypes()[0].equals(List.class)) {
                                                         List a = (List) method.invoke(dtoObject);
                                                         if (a == null) {
                                                             a = new ArrayList();
                                                             method1.invoke(object, a);//todo
                                                         } else {
-                                                            if(method.getName()!=null)
-                                                            method1.invoke(object, a.stream().map(o -> (parseFromDTOtoObject(o, (Class) ((ParameterizedType) method1.getParameters()[0].getParameterizedType()).getActualTypeArguments()[0]))).collect(toList()));//todo
+                                                            if (method.getName() != null)
+                                                                method1.invoke(object, a.stream().map(o -> (parseFromDTOtoObject(o, (Class) ((ParameterizedType) method1.getParameters()[0].getParameterizedType()).getActualTypeArguments()[0]))).collect(toList()));//todo
 
                                                         }
                                                     } else {
@@ -175,20 +169,23 @@ public class DtoMapperImpl implements DtoMapper {
         return null;
     }
 
+    private Boolean valid(Method method) {
+        return (method.getParameterTypes()[0].getSuperclass().equals(Enum.class)
+                || method.getParameterTypes()[0].equals(Enum.class)
+                || method.getParameterTypes()[0].equals(String.class)
+                || method.getParameterTypes()[0].equals(Character.class)
+                || method.getParameterTypes()[0].getSuperclass().equals(Number.class)
+                || method.getParameterTypes()[0].equals(LocalDate.class)
+                || method.getParameterTypes()[0].equals(Timestamp.class)
+                || method.getParameterTypes()[0].equals(LocalDateTime.class));
+    }
 
     private void parser(Object dtoObject, Object parsedObject, Method[] methods) {
         if (dtoObject == null)
             return;
         Arrays.stream(parsedObject.getClass().getMethods()).filter(method -> method.getName().contains("set")).forEach(
                 method -> {
-                    if ((method.getParameterTypes()[0].getSuperclass().equals(Enum.class)
-                            || method.getParameterTypes()[0].equals(Enum.class)
-                            || method.getParameterTypes()[0].equals(String.class)
-                            || method.getParameterTypes()[0].equals(Character.class)
-                            || method.getParameterTypes()[0].getSuperclass().equals(Number.class)
-                            || method.getParameterTypes()[0].equals(LocalDate.class)
-                            || method.getParameterTypes()[0].equals(Timestamp.class)
-                            || method.getParameterTypes()[0].equals(LocalDateTime.class))) {
+                    if (valid(method)) {
 
 
                         if (Arrays.stream(methods).filter(method1 -> method.getName().equals(method1.getName())).count() != 0) {

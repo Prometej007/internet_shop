@@ -1,10 +1,8 @@
 package com.web.edu.internetshop.service.impl;
 
-import com.web.edu.internetshop.InternetShopApplication;
-import com.web.edu.internetshop.model.Image;
+import com.web.edu.internetshop.model.product.Image;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.ImageRepository;
-import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.ImageService;
 import com.web.edu.internetshop.service.exceptions.SystemVariableNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,10 @@
 package com.web.edu.internetshop.repository;
 
-import com.web.edu.internetshop.model.Category;
-import com.web.edu.internetshop.model.Materials;
-import com.web.edu.internetshop.model.Product;
+import com.web.edu.internetshop.model.product.Category;
+import com.web.edu.internetshop.model.product.Materials;
+import com.web.edu.internetshop.model.product.Product;
 import com.web.edu.internetshop.model.enums.ProductType;
 import com.web.edu.internetshop.model.enums.SoftnessType;
-import com.web.edu.internetshop.service.impl.ImageServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,13 +14,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.util.stream.Collectors.toList;

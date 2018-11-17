@@ -1,6 +1,6 @@
 package com.web.edu.internetshop.service.impl;
 
-import com.web.edu.internetshop.model.Dictionary;
+import com.web.edu.internetshop.model.product.Dictionary;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.DictionaryRepository;
 import com.web.edu.internetshop.service.DictionaryService;

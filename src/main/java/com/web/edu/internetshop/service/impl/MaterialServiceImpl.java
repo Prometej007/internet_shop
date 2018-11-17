@@ -1,6 +1,6 @@
 package com.web.edu.internetshop.service.impl;
 
-import com.web.edu.internetshop.model.Materials;
+import com.web.edu.internetshop.model.product.Materials;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.MaterialsRepository;
 import com.web.edu.internetshop.service.DictionaryService;

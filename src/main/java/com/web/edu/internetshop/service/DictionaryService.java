@@ -1,6 +1,6 @@
 package com.web.edu.internetshop.service;
 
-import com.web.edu.internetshop.model.Dictionary;
+import com.web.edu.internetshop.model.product.Dictionary;
 
 public interface DictionaryService extends GrudOperations<Dictionary>{
 }

@@ -1,6 +1,6 @@
 package com.web.edu.internetshop.repository;
 
-import com.web.edu.internetshop.model.Category;
+import com.web.edu.internetshop.model.product.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,6 @@
 package com.web.edu.internetshop.repository;
 
-import com.web.edu.internetshop.model.Product;
-import com.web.edu.internetshop.model.enums.SoftnessType;
+import com.web.edu.internetshop.model.product.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

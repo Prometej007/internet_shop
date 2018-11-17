@@ -1,4 +1,4 @@
-package com.web.edu.internetshop.model;
+package com.web.edu.internetshop.model.product;
 
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
 import org.hibernate.annotations.DynamicUpdate;
