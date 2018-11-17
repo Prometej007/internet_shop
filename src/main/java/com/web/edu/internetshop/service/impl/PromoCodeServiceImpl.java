@@ -23,6 +23,11 @@ public class PromoCodeServiceImpl implements PromoCodeService {
         return promoCodeRepository.findByCode(code);
     }
 
+    @Override
+    public PromoCode findByCode(PromoCode promoCode) {
+        return findByCode(promoCode.getCode());
+    }
+
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public PromoCode create(PromoCode promoCode) {

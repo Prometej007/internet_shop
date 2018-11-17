@@ -4,6 +4,7 @@ import com.web.edu.internetshop.model.PromoCode;
 import com.web.edu.internetshop.model.buy.Bin;
 import com.web.edu.internetshop.model.buy.BinStatus;
 import com.web.edu.internetshop.model.buy.ItemBin;
+import com.web.edu.internetshop.model.product.Product;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.BinRepository;
 import com.web.edu.internetshop.service.*;
@@ -15,9 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class BinServiceImpl implements BinService {
@@ -32,6 +36,10 @@ public class BinServiceImpl implements BinService {
     private UserService userService;
     @Autowired
     private BinStatusService binStatusService;
+    @Autowired
+    private PromoCodeService promoCodeService;
+    @Autowired
+    private ItemBinService itemBinService;
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
@@ -40,6 +48,7 @@ public class BinServiceImpl implements BinService {
         generateUuid.generateOrder(bin)
                 .setPrice(price(bin));
         bin.setUser(userService.autoCreate(bin.getUser()));
+        bin.setItemBins(bin.getItemBins().stream().map(itemBin -> itemBinService.create(itemBin.setPricePerOne(price(itemBin.getProduct(),promoCodeService.findByCode(bin.getPromoCode()))), bin)).collect(toList()));
         binStatusService.create(bin);
         return save(
                 setLastModification(
@@ -56,7 +65,7 @@ public class BinServiceImpl implements BinService {
         AtomicReference<BigDecimal> reference = new AtomicReference<>(new BigDecimal(0));
 
         bin.getItemBins().forEach(itemBin -> {
-            reference.updateAndGet(bigDecimal -> bigDecimal.add(price(itemBin, bin.getPromoCode())));
+            reference.updateAndGet(bigDecimal -> bigDecimal.add(price(itemBin, promoCodeService.findByCode(bin.getPromoCode()))));
         });
 
         return reference.get();
@@ -69,11 +78,7 @@ public class BinServiceImpl implements BinService {
 
         if (ofNullable(promoCode).isPresent()) {
             itemBin.setPricePerOne(
-                    itemBin.getPricePerOne()
-                            .remainder(
-                                    itemBin.getPricePerOne()
-                                            .divide(new BigDecimal(100)
-                                                    .multiply(new BigDecimal(promoCode.getDiscount())), 2, 0))
+                    price(productService.findOne(itemBin.getProduct()), promoCode)
             );
         }
         reference.updateAndGet(bigDecimal -> bigDecimal.multiply(new BigDecimal(itemBin.getCount())));
@@ -81,6 +86,16 @@ public class BinServiceImpl implements BinService {
         return reference.get().setScale(2, 0);
     }
 
+    private BigDecimal price(Product product, PromoCode promoCode) {
+        if (ofNullable(promoCode).isPresent())
+            return product.getPrice()
+                    .remainder(
+                            product.getPrice()
+                                    .divide(new BigDecimal(100)
+                                            .multiply(new BigDecimal(promoCode.getDiscount())), 2, 0));
+        else
+            return product.getPrice();
+    }
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override

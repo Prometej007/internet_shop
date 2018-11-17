@@ -1,10 +1,12 @@
 package com.web.edu.internetshop.service.impl;
 
+import com.web.edu.internetshop.model.buy.Bin;
 import com.web.edu.internetshop.model.buy.ItemBin;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.ItemBinRepository;
 import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.ItemBinService;
+import com.web.edu.internetshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,25 @@ public class ItemBinServiceImpl implements ItemBinService {
 
     @Autowired
     private DictionaryService dictionaryService;
+    @Autowired
+    private ProductService productService;
 
     @Override
     public ItemBin create(ItemBin itemBin) {
         return save(
                 setLastModification(
-                        setDefaultAvailable(setDateCreate(itemBin))));
+                        setDefaultAvailable(
+                                setDateCreate(
+                                        itemBin.setProduct(productService.findOne(itemBin.getProduct()))
+                                )
+                        )
+                )
+        );
+    }
+
+    @Override
+    public ItemBin create(ItemBin itemBin, Bin bin) {
+        return create(itemBin.setBin(bin));
     }
 
     @Override
