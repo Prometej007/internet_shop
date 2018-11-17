@@ -6,10 +6,12 @@ import com.web.edu.internetshop.repository.BinStatusRepository;
 import com.web.edu.internetshop.service.BinStatusService;
 import com.web.edu.internetshop.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class BinStatusImpl implements BinStatusService {
 
     @Autowired
