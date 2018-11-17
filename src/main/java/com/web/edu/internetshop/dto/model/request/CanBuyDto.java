@@ -1,4 +1,4 @@
-package com.web.edu.internetshop.dto.model;
+package com.web.edu.internetshop.dto.model.request;
 
 import javax.validation.constraints.NotNull;
 

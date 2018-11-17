@@ -1,7 +1,6 @@
 package com.web.edu.internetshop.dto.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.web.edu.internetshop.dto.model.IdDto;
 import com.web.edu.internetshop.model.enums.ProductType;
 import com.web.edu.internetshop.model.enums.SoftnessType;
 

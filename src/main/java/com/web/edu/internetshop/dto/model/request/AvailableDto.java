@@ -1,4 +1,6 @@
-package com.web.edu.internetshop.dto.model;
+package com.web.edu.internetshop.dto.model.request;
+
+import com.web.edu.internetshop.dto.model.request.IdDto;
 
 import javax.validation.constraints.NotNull;
 
