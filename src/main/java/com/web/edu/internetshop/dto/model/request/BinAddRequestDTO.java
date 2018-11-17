@@ -1,6 +1,9 @@
 package com.web.edu.internetshop.dto.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.web.edu.internetshop.dto.model.ItemBinFullDto;
+import com.web.edu.internetshop.dto.model.PromocodeShortDto;
+import com.web.edu.internetshop.dto.model.UserFullDto;
 import com.web.edu.internetshop.model.PromoCode;
 import com.web.edu.internetshop.model.User;
 import com.web.edu.internetshop.model.buy.ItemBin;
@@ -12,9 +15,9 @@ import java.util.List;
 public class BinAddRequestDTO {
 
     @NotNull
-    private List<ItemBin> itemBins;
+    private List<ItemBinFullDto> itemBins;
     @NotNull
-    private User user;
+    private UserFullDto user;
     @NotNull
     private String order;
     @NotNull
@@ -26,22 +29,15 @@ public class BinAddRequestDTO {
     @NotNull
     private String comment;
     @NotNull
-    private PromoCode promoCode;
+    private PromocodeShortDto promoCode;
 
-    public List<ItemBin> getItemBins() {
+
+    public List<ItemBinFullDto> getItemBins() {
         return itemBins;
     }
 
-    public void setItemBins(List<ItemBin> itemBins) {
+    public void setItemBins(List<ItemBinFullDto> itemBins) {
         this.itemBins = itemBins;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getOrder() {
@@ -76,11 +72,19 @@ public class BinAddRequestDTO {
         this.comment = comment;
     }
 
-    public PromoCode getPromoCode() {
+    public UserFullDto getUser() {
+        return user;
+    }
+
+    public void setUser(UserFullDto user) {
+        this.user = user;
+    }
+
+    public PromocodeShortDto getPromoCode() {
         return promoCode;
     }
 
-    public void setPromoCode(PromoCode promoCode) {
+    public void setPromoCode(PromocodeShortDto promoCode) {
         this.promoCode = promoCode;
     }
 }

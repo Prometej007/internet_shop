@@ -1,19 +1,14 @@
-package com.web.edu.internetshop.dto.model.request;
+package com.web.edu.internetshop.dto.model;
 
-import com.web.edu.internetshop.dto.model.BinDto;
-import com.web.edu.internetshop.model.buy.Bin;
+import com.web.edu.internetshop.dto.utils.annotations.Dto;
 import com.web.edu.internetshop.model.enums.BinStatusType;
 
-import javax.validation.constraints.NotNull;
+@Dto
+public class BinStatusDto {
 
-public class BinStatusAddRequestDTO {
-
-    @NotNull
     private BinStatusType type;
-    @NotNull
     private String comment;
-    @NotNull
-    private BinDto bin;
+    private ItemBinFullDto bin;
 
     public BinStatusType getType() {
         return type;
@@ -31,11 +26,20 @@ public class BinStatusAddRequestDTO {
         this.comment = comment;
     }
 
-    public BinDto getBin() {
+    public ItemBinFullDto getBin() {
         return bin;
     }
 
-    public void setBin(BinDto bin) {
+    public void setBin(ItemBinFullDto bin) {
         this.bin = bin;
+    }
+
+    @Override
+    public String toString() {
+        return "BinStatusDto{" +
+                "type=" + type +
+                ", comment='" + comment + '\'' +
+                ", bin=" + bin +
+                '}';
     }
 }

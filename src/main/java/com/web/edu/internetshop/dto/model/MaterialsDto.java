@@ -7,7 +7,7 @@ public class MaterialsDto {
 
     private DictionaryDto name;
     private DictionaryDto description;
-    private Image image;
+    private ImageDto image;
 
     public DictionaryDto getName() {
         return name;
@@ -25,11 +25,11 @@ public class MaterialsDto {
         this.description = description;
     }
 
-    public Image getImage() {
+    public ImageDto getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(ImageDto image) {
         this.image = image;
     }
 }
