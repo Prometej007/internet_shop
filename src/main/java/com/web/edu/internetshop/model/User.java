@@ -15,7 +15,6 @@ public class User extends DateCreate<User> implements UserDetails {
 
     @ManyToMany
     private List<Product> seeProducts;
-
     private String email;
     private String password;
     private Boolean isAccountNonLocked;

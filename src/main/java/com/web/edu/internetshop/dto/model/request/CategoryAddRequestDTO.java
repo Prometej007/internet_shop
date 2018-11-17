@@ -1,17 +1,7 @@
 package com.web.edu.internetshop.dto.model.request;
 
-import com.web.edu.internetshop.dto.model.IdDto;
-import com.web.edu.internetshop.model.product.Dictionary;
-import com.web.edu.internetshop.model.product.Image;
-import com.web.edu.internetshop.model.product.Product;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 public class CategoryAddRequestDTO {
 
