@@ -36,6 +36,7 @@ public class BinServiceImpl implements BinService {
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Bin create(Bin bin) {
+        bin.setId(save(bin).getId());
         generateUuid.generateOrder(bin)
                 .setPrice(price(bin));
         bin.setUser(userService.autoCreate(bin.getUser()));
