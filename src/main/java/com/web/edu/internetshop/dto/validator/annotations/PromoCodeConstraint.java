@@ -11,7 +11,8 @@ import java.lang.annotation.*;
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PromoCodeConstraint {
-    String message() default "code is present";
+    String message() default "PromoCode error";
+    boolean exist() default true;
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
