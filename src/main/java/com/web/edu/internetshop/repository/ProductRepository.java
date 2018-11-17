@@ -46,7 +46,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
             " and ( ( :minMaximumLoad is null ) or p.maximum_load>=:minMaximumLoad)" +
             " and ( ( :maxMaximumLoad is null ) or p.maximum_load<=:maxMaximumLoad)" +
-            "",nativeQuery = true)
+            " and p.available=true",nativeQuery = true)
     List<Product> filter(
             @Param("category") List<Long> category,
             @Param("materials") List<Long> materials,
@@ -101,7 +101,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
             " and ( ( :minMaximumLoad is null ) or p.maximum_load>=:minMaximumLoad)" +
             " and ( ( :maxMaximumLoad is null ) or p.maximum_load<=:maxMaximumLoad)" +
-            " group by p.id order by ?#{#pageable}"
+            " and p.available=true group by p.id order by ?#{#pageable}"
             ,countQuery = "select count(*) from " +
             " product p left join category c2 on p.category_id = c2.id " +
             " left join product_materials pm on p.id = pm.product_id left join materials m on m.id = pm.materials_id " +
@@ -132,7 +132,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
             " and ( ( :minMaximumLoad is null ) or p.maximum_load>=:minMaximumLoad)" +
             " and ( ( :maxMaximumLoad is null ) or p.maximum_load<=:maxMaximumLoad)" +
-            " group by p.id order by ?#{#pageable}",nativeQuery = true)
+            " and p.available=true group by p.id order by ?#{#pageable}",nativeQuery = true)
     Page<Product> filter(
             @Param("category") List<Long> category,
             @Param("materials") List<Long> materials,

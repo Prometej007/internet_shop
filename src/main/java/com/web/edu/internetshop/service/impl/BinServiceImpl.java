@@ -2,13 +2,14 @@ package com.web.edu.internetshop.service.impl;
 
 import com.web.edu.internetshop.model.PromoCode;
 import com.web.edu.internetshop.model.buy.Bin;
+import com.web.edu.internetshop.model.buy.BinStatus;
 import com.web.edu.internetshop.model.buy.ItemBin;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.BinRepository;
-import com.web.edu.internetshop.service.BinService;
-import com.web.edu.internetshop.service.ItemBinService;
-import com.web.edu.internetshop.service.ProductService;
+import com.web.edu.internetshop.service.*;
+import com.web.edu.internetshop.service.utils.GenerateUuid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,12 +26,29 @@ public class BinServiceImpl implements BinService {
     private BinRepository binRepository;
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private GenerateUuid generateUuid;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private BinStatusService binStatusService;
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Bin create(Bin bin) {
-        return save(setLastModification(bin));
+        generateUuid.generateOrder(bin)
+                .setPrice(price(bin));
+        bin.setUser(userService.autoCreate(bin.getUser()));
+        binStatusService.create(bin);
+        return save(
+                setLastModification(
+                        setDateCreate(
+                                setDefaultAvailable(
+                                        bin
+                                )
+                        )
+                )
+        );
     }
 
     private BigDecimal price(Bin bin) {
