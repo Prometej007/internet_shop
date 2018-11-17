@@ -1,20 +1,24 @@
 package com.web.edu.internetshop.model;
 
+import com.web.edu.internetshop.model.product.Product;
 import com.web.edu.internetshop.model.utils.pattern.DateCreate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User extends DateCreate<User> implements UserDetails {
 
+    @ManyToMany
+    private List<Product> seeProducts;
+
     private String email;
     private String password;
-    private Boolean isAccountNonExpired;
     private Boolean isAccountNonLocked;
-    private Boolean isCredentialsNonExpired;
     private Boolean isEnabled;
     private String uuid;
 
@@ -23,13 +27,37 @@ public class User extends DateCreate<User> implements UserDetails {
         return "User{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", isAccountNonExpired=" + isAccountNonExpired +
                 ", isAccountNonLocked=" + isAccountNonLocked +
-                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
                 ", isEnabled=" + isEnabled +
                 '}';
     }
 
+    public List<Product> getSeeProducts() {
+        return seeProducts;
+    }
+
+    public User setSeeProducts(List<Product> seeProducts) {
+        this.seeProducts = seeProducts;
+        return this;
+    }
+
+    public Boolean getAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public User setAccountNonLocked(Boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+        return this;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public User setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+        return this;
+    }
 
     public String getEmail() {
         return email;
@@ -70,11 +98,7 @@ public class User extends DateCreate<User> implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        isAccountNonExpired = accountNonExpired;
+        return true;
     }
 
     @Override
@@ -88,12 +112,9 @@ public class User extends DateCreate<User> implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
+        return true;
     }
 
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        isCredentialsNonExpired = credentialsNonExpired;
-    }
 
     @Override
     public boolean isEnabled() {
