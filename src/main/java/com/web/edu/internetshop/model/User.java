@@ -24,6 +24,15 @@ public class User extends DateCreate<User> implements UserDetails {
     private Boolean isAccountNonLocked;
     private Boolean isEnabled;
     private String uuid;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getPhone() {
         return phone;
