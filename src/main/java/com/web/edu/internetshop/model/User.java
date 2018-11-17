@@ -12,10 +12,10 @@ public class User extends DateCreate<User> implements UserDetails {
 
     private String email;
     private String password;
-    private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isCredentialsNonExpired;
-    private boolean isEnabled;
+    private Boolean isAccountNonExpired;
+    private Boolean isAccountNonLocked;
+    private Boolean isCredentialsNonExpired;
+    private Boolean isEnabled;
     private String uuid;
 
     @Override

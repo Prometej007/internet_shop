@@ -45,7 +45,7 @@ public class MailServiceImpl implements MailService {
     }
     @Override
     public User sendAutoRegistration(User user,String password) {
-        send(user.getEmail(), "автоматична реєстрація реєстрації", "auto.registration.html",
+        send(user.getEmail(), "автоматична реєстрації", "auto.registration.html",
                 new BuilderMap()
                 .put("user", user)
                 .put("password", password)
