@@ -15,12 +15,51 @@ public class User extends DateCreate<User> implements UserDetails {
 
     @ManyToMany
     private List<Product> seeProducts;
-
+    private String phone;
+    private String firstName;
+    private String lastName;
+    private String middleName;
     private String email;
     private String password;
     private Boolean isAccountNonLocked;
     private Boolean isEnabled;
     private String uuid;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public User setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public User setMiddleName(String middleName) {
+        this.middleName = middleName;
+        return this;
+    }
 
     @Override
     public String toString() {
@@ -87,9 +126,7 @@ public class User extends DateCreate<User> implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
 
     @Override
     public String getUsername() {
@@ -106,24 +143,22 @@ public class User extends DateCreate<User> implements UserDetails {
         return isAccountNonLocked;
     }
 
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        isAccountNonLocked = accountNonLocked;
-    }
 
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    public User setPassword(String password) {
+        this.password = password;
+        return this;
+    }
 
     @Override
     public boolean isEnabled() {
         return isEnabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
 
 
 }
