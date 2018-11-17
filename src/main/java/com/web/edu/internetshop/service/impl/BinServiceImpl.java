@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
@@ -43,12 +44,19 @@ public class BinServiceImpl implements BinService {
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
+    public Bin create(Bin bin, Principal principal) {
+        bin.getUser().setEmail(principal.getName());
+        return create(bin);
+    }
+
+    @Transactional(rollbackFor = RuntimeException.class)
+    @Override
     public Bin create(Bin bin) {
         bin.setId(save(bin).getId());
         generateUuid.generateOrder(bin)
                 .setPrice(price(bin));
         bin.setUser(userService.autoCreate(bin.getUser()));
-        bin.setItemBins(bin.getItemBins().stream().map(itemBin -> itemBinService.create(itemBin.setPricePerOne(price(itemBin.getProduct(),promoCodeService.findByCode(bin.getPromoCode()))), bin)).collect(toList()));
+        bin.setItemBins(bin.getItemBins().stream().map(itemBin -> itemBinService.create(itemBin.setPricePerOne(price(itemBin.getProduct(), promoCodeService.findByCode(bin.getPromoCode()))), bin)).collect(toList()));
         binStatusService.create(bin);
         return save(
                 setLastModification(
