@@ -43,6 +43,12 @@ public class DtoMapperImpl implements DtoMapper {
     }
 
     public Object parseFromDTOtoObject(Object dtoObject, Class... parsingClasses) {
+
+        if (valid(parsingClasses[0])) {
+            return dtoObject;
+        }
+
+
         if (dtoObject == null)
             return null;
         try {
@@ -177,7 +183,20 @@ public class DtoMapperImpl implements DtoMapper {
                 || method.getParameterTypes()[0].getSuperclass().equals(Number.class)
                 || method.getParameterTypes()[0].equals(LocalDate.class)
                 || method.getParameterTypes()[0].equals(Timestamp.class)
+                || method.getParameterTypes()[0].equals(Boolean.class)
                 || method.getParameterTypes()[0].equals(LocalDateTime.class));
+    }
+
+    private Boolean valid(Class method) {
+        return (method.getSuperclass().equals(Enum.class)
+                || method.equals(Enum.class)
+                || method.equals(String.class)
+                || method.equals(Character.class)
+                || method.getSuperclass().equals(Number.class)
+                || method.equals(LocalDate.class)
+                || method.equals(Boolean.class)
+                || method.equals(Timestamp.class)
+                || method.equals(LocalDateTime.class));
     }
 
     private void parser(Object dtoObject, Object parsedObject, Method[] methods) {

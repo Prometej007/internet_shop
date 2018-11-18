@@ -7,6 +7,8 @@ import com.web.edu.internetshop.service.CategoryService;
 import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,4 +76,10 @@ public class CategoryServiceImpl implements CategoryService {
     public Category lastModification(LastModification<Category> lastModification) {
         return save(setLastModification(findOne(lastModification.getId())));
     }
+
+    @Override
+    public Page<Category> findAll(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
+    }
+
 }

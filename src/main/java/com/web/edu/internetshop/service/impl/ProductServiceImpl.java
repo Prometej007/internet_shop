@@ -7,6 +7,7 @@ import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.ImageService;
 import com.web.edu.internetshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,5 +117,10 @@ public class ProductServiceImpl implements ProductService {
         Product product1 = findOne(product);
         product1.setCanBuy(false);
         return true;
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 }

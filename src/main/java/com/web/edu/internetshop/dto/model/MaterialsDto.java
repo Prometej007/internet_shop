@@ -1,9 +1,10 @@
 package com.web.edu.internetshop.dto.model;
 
+import com.web.edu.internetshop.dto.model.request.IdDto;
 import com.web.edu.internetshop.model.product.Dictionary;
 import com.web.edu.internetshop.model.product.Image;
 
-public class MaterialsDto {
+public class MaterialsDto extends IdDto {
 
     private DictionaryDto name;
     private DictionaryDto description;

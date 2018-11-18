@@ -20,7 +20,7 @@ public class ProductAddRequestDTO {
     @NotNull
     private IdDto category;
     @NotNull
-    private IdDto materials;
+    private List<IdDto> materials;
     @NotNull
     private List<SoftnessType> softnessTypes;
     @NotNull
@@ -81,12 +81,13 @@ public class ProductAddRequestDTO {
         this.category = category;
     }
 
-    public IdDto getMaterials() {
+    public List<IdDto> getMaterials() {
         return materials;
     }
 
-    public void setMaterials(IdDto materials) {
+    public ProductAddRequestDTO setMaterials(List<IdDto> materials) {
         this.materials = materials;
+        return this;
     }
 
     public List<SoftnessType> getSoftnessTypes() {

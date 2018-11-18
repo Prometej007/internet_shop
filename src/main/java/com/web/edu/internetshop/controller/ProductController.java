@@ -11,9 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
+
+import static com.web.edu.internetshop.dto.utils.builder.Builder.map;
 
 @RestController
 @RequestMapping("/product")
@@ -26,8 +29,8 @@ public class ProductController {
     }
 
     @PostMapping("/save-product")
-    public ResponseEntity<HttpStatus> saveProduct(@RequestBody ProductAddRequestDTO request) {
-        productService.create(Builder.map(request, Product.class));
+    public ResponseEntity<HttpStatus> saveProduct( @Valid @RequestBody ProductAddRequestDTO request) {
+        productService.create(map(request, Product.class));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -40,12 +43,12 @@ public class ProductController {
 
     @GetMapping("/find-product")
     public ResponseEntity<ProductFullDto> retrieveProduct(@RequestParam Long productId) {
-        final ProductFullDto product = Builder.map(productService.findOne(productId), ProductFullDto.class);
+        final ProductFullDto product = map(productService.findOne(productId), ProductFullDto.class);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @GetMapping("/find-products")
-    public ResponseEntity<List<ProductShortDto>> retrieveProducts(@RequestParam List<Long> category,
+    public ResponseEntity<List<ProductFullDto>> retrieveProducts(@RequestParam List<Long> category,
                                                                   @RequestParam List<Long> materials,
                                                                   @RequestParam List<Integer> softness,
                                                                   @RequestParam List<Integer> productType,
@@ -78,6 +81,14 @@ public class ProductController {
                 minMaximumLoad,
                 maxMaximumLoad,
                 pageable);
-        return new ResponseEntity<>(Builder.map(products, ProductShortDto.class), HttpStatus.OK);
+        return new ResponseEntity<>(map(products, ProductFullDto.class), HttpStatus.OK);
     }
+
+
+    @GetMapping
+    private ResponseEntity findAll(@NotNull final Pageable pageable) {
+
+        return ResponseEntity.ok(productService.findAll(pageable).map(product -> map(product, ProductFullDto.class)));
+    }
+
 }

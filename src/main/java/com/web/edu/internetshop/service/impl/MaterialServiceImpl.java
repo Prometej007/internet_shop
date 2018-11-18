@@ -7,6 +7,8 @@ import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.ImageService;
 import com.web.edu.internetshop.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,5 +75,8 @@ public class MaterialServiceImpl implements MaterialService {
         return save(setLastModification(findOne(lastModification.getId())));
     }
 
-
+    @Override
+    public Page<Materials> findAll(Pageable pageable) {
+        return materialsRepository.findAll(pageable);
+    }
 }
