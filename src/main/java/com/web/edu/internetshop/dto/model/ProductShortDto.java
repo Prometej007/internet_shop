@@ -1,13 +1,14 @@
 package com.web.edu.internetshop.dto.model;
 
 
+import com.web.edu.internetshop.dto.model.request.IdDto;
 import com.web.edu.internetshop.dto.utils.annotations.Dto;
 import com.web.edu.internetshop.model.product.Dictionary;
 
 import java.math.BigDecimal;
 
 @Dto
-public class ProductShortDto {
+public class ProductShortDto extends IdDto {
 
     protected DictionaryDto name;
     protected DictionaryDto description;
