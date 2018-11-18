@@ -82,7 +82,7 @@ public class ImageServiceImpl implements ImageService {
     private String build(Image img) throws RuntimeException {
         if (!ofNullable(System.getenv(FILE_HOME)).isPresent())
             throw new SystemVariableNotFoundException(FILE_HOME);
-        String[] parts = img.getPath().split(",");
+        String[] parts = img.getContent().split(",");
         String imageString = parts[1];
 
 // create a buffered image
