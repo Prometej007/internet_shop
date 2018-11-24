@@ -60,9 +60,10 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public Bin sendInfoNewBinStatus(Bin bin) {
-        send(bin.getUser().getEmail(), "у вашого замовлення новий статус", "auto.registration.html",
+        send(bin.getUser().getEmail(), "у вашого замовлення новий статус", "new.status.html",
                 new BuilderMap()
                         .put("bin", bin)
+                        .put("status", bin.getStatuses().get(bin.getStatuses().size()-1))
                         .build());
         return bin;
     }
