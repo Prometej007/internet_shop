@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/bin")
 public class BinController {
@@ -21,8 +23,15 @@ public class BinController {
 
     @PostMapping("/price")
     private ResponseEntity getPrice(@RequestBody BinPriceRequestDTO binAddRequestDTO) {
-
         return ResponseEntity.ok(binService.getPrice(Builder.map(binAddRequestDTO, Bin.class)));
+    }
+
+    @PostMapping("/buy")
+    private ResponseEntity getPrice(@RequestBody BinAddRequestDTO binAddRequestDTO, Principal principal) {
+        Bin bin=Builder.map(binAddRequestDTO, Bin.class);
+        System.out.println(binAddRequestDTO);
+        binService.create(bin, principal);
+        return ResponseEntity.ok().build();
     }
 
 }

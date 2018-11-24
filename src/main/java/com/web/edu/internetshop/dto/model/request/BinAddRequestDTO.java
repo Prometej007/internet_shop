@@ -87,4 +87,17 @@ public class BinAddRequestDTO {
     public void setPromoCode(PromocodeShortDto promoCode) {
         this.promoCode = promoCode;
     }
+
+    @Override
+    public String toString() {
+        return "BinAddRequestDTO{" +
+                "itemBins=" + itemBins +
+                ", user=" + user +
+                ", order='" + order + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", comment='" + comment + '\'' +
+                ", promoCode=" + promoCode +
+                '}';
+    }
 }

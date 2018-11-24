@@ -5,7 +5,7 @@ import com.web.edu.internetshop.dto.utils.annotations.Dto;
 @Dto
 public class PromocodeShortDto {
 
-    protected String code;
+    public String code;
 
     public String getCode() {
         return code;
@@ -13,5 +13,12 @@ public class PromocodeShortDto {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "PromocodeShortDto{" +
+                "code='" + code + '\'' +
+                '}';
     }
 }

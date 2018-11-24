@@ -27,7 +27,7 @@ public class Bin extends DateCreate<Bin> {
     private List<BinStatus> statuses;
     private String city;
     private String address;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private PromoCode promoCode;
 
     public String getAddress() {

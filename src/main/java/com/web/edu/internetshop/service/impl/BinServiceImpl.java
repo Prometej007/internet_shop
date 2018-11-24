@@ -54,7 +54,8 @@ public class BinServiceImpl implements BinService {
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public Bin create(Bin bin) {
-        bin.setId(save(bin).getId());
+        bin.setId(save(new Bin()).getId());
+        bin.setPromoCode(promoCodeService.findByCode(bin.getPromoCode()));
         generateUuid.generateOrder(bin)
                 .setPrice(price(bin));
         bin.setUser(userService.autoCreate(bin.getUser()));
@@ -103,16 +104,16 @@ public class BinServiceImpl implements BinService {
     }
 
     private BigDecimal price(Product product, PromoCode promoCode) {
-        if (ofNullable(promoCode).isPresent()){
-            if(promoCode.getProduct().stream().anyMatch(product1 -> product1.getId().equals(product.getId())))
+        if (ofNullable(promoCode).isPresent()) {
+            if (promoCode.getProduct().stream().anyMatch(product1 -> product1.getId().equals(product.getId())))
                 return product.getPrice()
-                    .remainder(
-                            product.getPrice()
-                                    .divide(new BigDecimal(100)
-                                            .multiply(new BigDecimal(promoCode.getDiscount())), 2, 0));
+                        .remainder(
+                                product.getPrice()
+                                        .divide(new BigDecimal(100)
+                                                .multiply(new BigDecimal(promoCode.getDiscount())), 2, 0));
         }
 
-            return product.getPrice();
+        return product.getPrice();
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
