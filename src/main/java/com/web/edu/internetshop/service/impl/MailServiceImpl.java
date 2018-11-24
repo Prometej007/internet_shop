@@ -72,7 +72,7 @@ public class MailServiceImpl implements MailService {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, "UTF-8");
             messageHelper.setTo(mail);
             messageHelper.setSubject(title);
-            messageHelper.setText(mailContentBuilder.getTemplate(template, model), true);
+            messageHelper.setText(mailContentBuilder.getFreeMarkerTemplateContent(template, model), true);
         });
     }
 
