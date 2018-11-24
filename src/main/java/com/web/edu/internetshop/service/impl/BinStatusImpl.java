@@ -5,6 +5,7 @@ import com.web.edu.internetshop.model.buy.BinStatus;
 import com.web.edu.internetshop.model.enums.BinStatusType;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.BinStatusRepository;
+import com.web.edu.internetshop.service.BinService;
 import com.web.edu.internetshop.service.BinStatusService;
 import com.web.edu.internetshop.service.DictionaryService;
 import com.web.edu.internetshop.service.MailService;
@@ -24,10 +25,20 @@ public class BinStatusImpl implements BinStatusService {
     private DictionaryService dictionaryService;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private BinService binService;
 
     @Override
     public BinStatus create(BinStatusType type) {
-        return create(new BinStatus().setType(type));
+        return create(
+                setDateCreate(
+                        setDefaultAvailable(
+                                setLastModification(
+                                        new BinStatus().setType(type)
+                                )
+                        )
+                )
+        );
     }
 
     @Override
@@ -43,6 +54,11 @@ public class BinStatusImpl implements BinStatusService {
     @Override
     public BinStatus create(BinStatusType type, Bin bin, String comment) {
         return create(new BinStatus().setType(type).setBin(bin).setComment(comment));
+    }
+
+    @Override
+    public BinStatus create(BinStatusType type, Long bin, String comment) {
+        return create(type, binService.findOne(bin), comment);
     }
 
     @Override

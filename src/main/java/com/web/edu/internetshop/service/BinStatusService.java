@@ -13,4 +13,6 @@ public interface BinStatusService extends GrudOperations<BinStatus> {
     BinStatus create(BinStatusType type, String comment);
 
     BinStatus create(BinStatusType type, Bin bin, String comment);
+
+    BinStatus create(BinStatusType type, Long bin, String comment);
 }
