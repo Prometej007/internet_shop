@@ -18,17 +18,17 @@ public class BinAddRequestDTO {
     private List<ItemBinFullDto> itemBins;
     @NotNull
     private UserFullDto user;
-    @NotNull
+
     private String order;
-    @NotNull
+
     @JsonFormat(shape= JsonFormat.Shape.STRING)
     private BigDecimal price;
-    @NotNull
+
     @JsonFormat (shape= JsonFormat.Shape.STRING)
     private BigDecimal discount;
-    @NotNull
+
     private String comment;
-    @NotNull
+
     private PromocodeShortDto promoCode;
 
 

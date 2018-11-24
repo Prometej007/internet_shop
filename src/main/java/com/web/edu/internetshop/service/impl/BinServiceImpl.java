@@ -71,6 +71,11 @@ public class BinServiceImpl implements BinService {
         );
     }
 
+    @Override
+    public BigDecimal getPrice(Bin bin) {
+        return price(bin);
+    }
+
     private BigDecimal price(Bin bin) {
         AtomicReference<BigDecimal> reference = new AtomicReference<>(new BigDecimal(0));
 
@@ -91,6 +96,7 @@ public class BinServiceImpl implements BinService {
                     price(productService.findOne(itemBin.getProduct()), promoCode)
             );
         }
+        reference.updateAndGet(bigDecimal -> bigDecimal.add(itemBin.getPricePerOne()));
         reference.updateAndGet(bigDecimal -> bigDecimal.multiply(new BigDecimal(itemBin.getCount())));
 
         return reference.get().setScale(2, 0);

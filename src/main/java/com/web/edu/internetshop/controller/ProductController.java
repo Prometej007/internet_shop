@@ -68,6 +68,8 @@ public class ProductController {
                                                                   @RequestParam(required = false) Double minMaximumLoad,
                                                                   @RequestParam(required = false) Double maxMaximumLoad,
                                                                   @NotNull final Pageable pageable) {
+        System.out.println(pageable.getPageSize());
+        System.out.println(pageable.getPageNumber());
         final Page<Product> products = productService.findProductsByPageable(category,
                 materials,
                 softness,

@@ -2,23 +2,14 @@ package com.web.edu.internetshop.dto.model;
 
 public class ItemBinFullDto extends ItemBinShortDto {
 
-    private ProductFullDto productFullDto;
+    private ProductFullDto product;
 
-    public ProductFullDto getProductFullDto() {
-        return productFullDto;
+    public ProductFullDto getProduct() {
+        return product;
     }
 
-    public void setProductFullDto(ProductFullDto productFullDto) {
-        this.productFullDto = productFullDto;
-    }
-
-    @Override
-    public String toString() {
-        return "ItemBinFullDto{" +
-                "productFullDto=" + productFullDto +
-                ", bin=" + bin +
-                ", count=" + count +
-                ", pricePerOne=" + pricePerOne +
-                '}';
+    public ItemBinFullDto setProduct(ProductFullDto product) {
+        this.product = product;
+        return this;
     }
 }
