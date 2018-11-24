@@ -58,7 +58,10 @@ public class BinServiceImpl implements BinService {
         bin.setPromoCode(promoCodeService.findByCode(bin.getPromoCode()));
         generateUuid.generateOrder(bin)
                 .setPrice(price(bin));
+        if(!ofNullable(userService.findByEmail(bin.getUser())).isPresent())
         bin.setUser(userService.autoCreate(bin.getUser()));
+        else
+            bin.setUser(userService.findByEmail(bin.getUser()));
         bin.setItemBins(bin.getItemBins().stream().map(itemBin -> itemBinService.create(itemBin.setPricePerOne(price(itemBin.getProduct(), promoCodeService.findByCode(bin.getPromoCode()))), bin)).collect(toList()));
         binStatusService.create(bin);
         return save(
