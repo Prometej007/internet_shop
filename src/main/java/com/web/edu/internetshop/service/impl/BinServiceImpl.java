@@ -4,12 +4,15 @@ import com.web.edu.internetshop.model.PromoCode;
 import com.web.edu.internetshop.model.buy.Bin;
 import com.web.edu.internetshop.model.buy.BinStatus;
 import com.web.edu.internetshop.model.buy.ItemBin;
+import com.web.edu.internetshop.model.enums.BinStatusType;
 import com.web.edu.internetshop.model.product.Product;
 import com.web.edu.internetshop.model.utils.pattern.LastModification;
 import com.web.edu.internetshop.repository.BinRepository;
 import com.web.edu.internetshop.service.*;
 import com.web.edu.internetshop.service.utils.GenerateUuid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,6 +81,16 @@ public class BinServiceImpl implements BinService {
     @Override
     public BigDecimal getPrice(Bin bin) {
         return price(bin);
+    }
+
+    @Override
+    public Page<Bin> filter(BinStatusType binStatusType, Pageable pageable) {
+        return binRepository.adminFilter(binStatusType.ordinal(),pageable);
+    }
+
+    @Override
+    public Page<Bin> findAll(Pageable pageable) {
+        return binRepository.findAll(pageable);
     }
 
     private BigDecimal price(Bin bin) {

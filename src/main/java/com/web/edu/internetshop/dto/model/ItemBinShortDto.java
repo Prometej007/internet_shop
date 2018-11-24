@@ -8,18 +8,11 @@ import java.math.BigDecimal;
 @Dto
 public class ItemBinShortDto {
 
-    protected BinDto bin;
     protected Integer count;
     protected BigDecimal pricePerOne;
 
 
-    public BinDto getBin() {
-        return bin;
-    }
 
-    public void setBin(BinDto bin) {
-        this.bin = bin;
-    }
 
     public Integer getCount() {
         return count;

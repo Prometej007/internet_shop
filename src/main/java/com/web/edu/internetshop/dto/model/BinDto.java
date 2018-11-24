@@ -1,15 +1,16 @@
 package com.web.edu.internetshop.dto.model;
 
+import com.web.edu.internetshop.dto.model.request.IdDto;
 import com.web.edu.internetshop.dto.utils.annotations.Dto;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Dto
-public class BinDto {
+public class BinDto extends IdDto {
 
     private List<ItemBinFullDto> itemBins;
-    private UserFullDto user;
+    private UserShortDto user;
     private String order;
     private BigDecimal price;
     private BigDecimal discount;
@@ -17,7 +18,7 @@ public class BinDto {
     private List<BinStatusDto> statuses;
     private String city;
     private String address;
-    private PromocodeFullDto promoCode;
+    private PromocodeShortDto promoCode;
 
     @Override
     public String toString() {
@@ -43,12 +44,13 @@ public class BinDto {
         this.itemBins = itemBins;
     }
 
-    public UserFullDto getUser() {
+    public UserShortDto getUser() {
         return user;
     }
 
-    public void setUser(UserFullDto user) {
+    public BinDto setUser(UserShortDto user) {
         this.user = user;
+        return this;
     }
 
     public String getOrder() {
@@ -107,11 +109,12 @@ public class BinDto {
         this.address = address;
     }
 
-    public PromocodeFullDto getPromoCode() {
+    public PromocodeShortDto getPromoCode() {
         return promoCode;
     }
 
-    public void setPromoCode(PromocodeFullDto promoCode) {
+    public BinDto setPromoCode(PromocodeShortDto promoCode) {
         this.promoCode = promoCode;
+        return this;
     }
 }

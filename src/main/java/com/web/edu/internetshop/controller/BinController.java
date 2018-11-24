@@ -1,18 +1,22 @@
 package com.web.edu.internetshop.controller;
 
+import com.web.edu.internetshop.dto.model.BinDto;
 import com.web.edu.internetshop.dto.model.request.BinAddRequestDTO;
 import com.web.edu.internetshop.dto.model.request.BinPriceRequestDTO;
 import com.web.edu.internetshop.dto.utils.builder.Builder;
 import com.web.edu.internetshop.model.buy.Bin;
+import com.web.edu.internetshop.model.buy.BinStatus;
+import com.web.edu.internetshop.model.enums.BinStatusType;
 import com.web.edu.internetshop.service.BinService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
+
+import static java.util.Optional.ofNullable;
 
 @RestController
 @RequestMapping("/bin")
@@ -32,6 +36,15 @@ public class BinController {
         System.out.println(binAddRequestDTO);
         binService.create(bin, principal);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/filter")
+    private ResponseEntity getPrice(
+            @RequestParam(required = false) BinStatusType type,
+            @NotNull final Pageable pageable) {
+        if(ofNullable(type).isPresent())
+            return ResponseEntity.ok(binService.filter(type,pageable).map(bin -> Builder.map(bin, BinDto.class)));
+        else
+            return ResponseEntity.ok(binService.findAll(pageable).map(bin -> Builder.map(bin, BinDto.class)));
     }
 
 }
