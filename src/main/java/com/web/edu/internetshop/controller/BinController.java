@@ -32,19 +32,27 @@ public class BinController {
 
     @PostMapping("/buy")
     private ResponseEntity getPrice(@RequestBody BinAddRequestDTO binAddRequestDTO, Principal principal) {
-        Bin bin=Builder.map(binAddRequestDTO, Bin.class);
+        Bin bin = Builder.map(binAddRequestDTO, Bin.class);
         System.out.println(binAddRequestDTO);
         binService.create(bin, principal);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/filter")
     private ResponseEntity getPrice(
             @RequestParam(required = false) BinStatusType type,
             @NotNull final Pageable pageable) {
-        if(ofNullable(type).isPresent())
-            return ResponseEntity.ok(binService.filter(type,pageable).map(bin -> Builder.map(bin, BinDto.class)));
+        if (ofNullable(type).isPresent())
+            return ResponseEntity.ok(binService.filter(type, pageable).map(bin -> Builder.map(bin, BinDto.class)));
         else
             return ResponseEntity.ok(binService.findAll(pageable).map(bin -> Builder.map(bin, BinDto.class)));
+    }
+
+
+    @GetMapping("/{id}")
+    private ResponseEntity findOne(@PathVariable Long id) {
+
+        return ResponseEntity.ok(Builder.map(binService.findOne(id), BinDto.class));
     }
 
 }
