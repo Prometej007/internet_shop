@@ -1,11 +1,13 @@
 package com.web.edu.internetshop.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.web.edu.internetshop.dto.model.ProductFullDto;
 import com.web.edu.internetshop.dto.model.ProductShortDto;
 import com.web.edu.internetshop.dto.model.request.ProductAddRequestDTO;
 import com.web.edu.internetshop.dto.utils.builder.Builder;
 import com.web.edu.internetshop.model.product.Product;
 import com.web.edu.internetshop.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,25 +49,26 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @GetMapping("/find-products")
-    public ResponseEntity<List<ProductFullDto>> retrieveProducts(@RequestParam List<Long> category,
-                                                                  @RequestParam List<Long> materials,
-                                                                  @RequestParam List<Integer> softness,
-                                                                  @RequestParam List<Integer> productType,
-                                                                  @RequestParam Boolean winterSummerOption,
-                                                                  @RequestParam BigDecimal minPrice,
-                                                                  @RequestParam BigDecimal maxPrice,
-                                                                  @RequestParam Double minHeight,
-                                                                  @RequestParam Double maxHeight,
-                                                                  @RequestParam Double minWidth,
-                                                                  @RequestParam Double maxWidth,
-                                                                  @RequestParam Double minLength,
-                                                                  @RequestParam Double maxLength,
-                                                                  @RequestParam Double minMaximumLoad,
-                                                                  @RequestParam Double maxMaximumLoad,
+    @PostMapping("/find-products-filter")
+    public ResponseEntity<Page<ProductFullDto>> retrieveProducts(@RequestParam(required = false,defaultValue = "-1") List<Long> category,
+                                                                  @RequestParam(required = false,defaultValue = "-1") List<Long> materials,
+                                                                  @RequestParam(required = false,defaultValue = "-1") List<Integer> softness,
+                                                                  @RequestParam(required = false,defaultValue = "-1") List<Integer> productType,
+                                                                  @RequestParam(required = false) Boolean winterSummerOption,
+                                                                 @JsonFormat(shape = JsonFormat.Shape.STRING)
+                                                                     @RequestParam(required = false) BigDecimal minPrice,
+                                                                 @JsonFormat(shape = JsonFormat.Shape.STRING)
+                                                                  @RequestParam(required = false) BigDecimal maxPrice,
+                                                                  @RequestParam(required = false) Double minHeight,
+                                                                  @RequestParam(required = false) Double maxHeight,
+                                                                  @RequestParam(required = false) Double minWidth,
+                                                                  @RequestParam(required = false) Double maxWidth,
+                                                                  @RequestParam(required = false) Double minLength,
+                                                                  @RequestParam(required = false) Double maxLength,
+                                                                  @RequestParam(required = false) Double minMaximumLoad,
+                                                                  @RequestParam(required = false) Double maxMaximumLoad,
                                                                   @NotNull final Pageable pageable) {
-
-        final List<Product> products = productService.findProductsByPageable(category,
+        final Page<Product> products = productService.findProductsByPageable(category,
                 materials,
                 softness,
                 productType,
@@ -81,7 +84,7 @@ public class ProductController {
                 minMaximumLoad,
                 maxMaximumLoad,
                 pageable);
-        return new ResponseEntity<>(map(products, ProductFullDto.class), HttpStatus.OK);
+        return new ResponseEntity<>(products.map(product -> map(product, ProductFullDto.class)), HttpStatus.OK);
     }
 
 

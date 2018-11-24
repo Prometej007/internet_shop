@@ -32,5 +32,10 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.findAll(pageable).map(category -> map(category, CategoryShortDto.class)));
     }
 
+    @GetMapping("/active")
+    private ResponseEntity findAllAvailable(@NotNull final Pageable pageable) {
+        return ResponseEntity.ok(categoryService.findAllAvailable(pageable).map(category -> map(category, CategoryShortDto.class)));
+    }
+
 
 }

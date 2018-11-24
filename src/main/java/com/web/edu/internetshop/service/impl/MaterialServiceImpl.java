@@ -79,4 +79,9 @@ public class MaterialServiceImpl implements MaterialService {
     public Page<Materials> findAll(Pageable pageable) {
         return materialsRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Materials> findAllAvailable(Pageable pageable) {
+        return materialsRepository.findAllByAvailable(true,pageable);
+    }
 }

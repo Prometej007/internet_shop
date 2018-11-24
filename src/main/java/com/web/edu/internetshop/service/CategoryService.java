@@ -8,4 +8,6 @@ public interface CategoryService extends GrudOperations<Category> {
 
     Page<Category> findAll(Pageable pageable);
 
+    Page<Category> findAllAvailable(Pageable pageable);
+
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService extends GrudOperations<Product> {
 
-    List<Product> findProductsByPageable( final List<Long> category,
+    Page<Product> findProductsByPageable( final List<Long> category,
                                           final List<Long> materials,
                                           final List<Integer> softness,
                                           final List<Integer> productType,

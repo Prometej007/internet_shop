@@ -33,4 +33,9 @@ public class MaterialController {
         return ResponseEntity.ok(materialService.findAll(pageable).map(materials -> map(materials, MaterialsDto.class)));
     }
 
+    @GetMapping("/active")
+    private ResponseEntity findAllAvailable(@NotNull final Pageable pageable) {
+        return ResponseEntity.ok(materialService.findAllAvailable(pageable).map(materials -> map(materials, MaterialsDto.class)));
+    }
+
 }

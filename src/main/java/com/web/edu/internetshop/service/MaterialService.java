@@ -9,4 +9,6 @@ import java.util.List;
 public interface MaterialService extends GrudOperations<Materials>{
 
     Page<Materials> findAll(Pageable pageable);
+
+    Page<Materials> findAllAvailable(Pageable pageable);
 }

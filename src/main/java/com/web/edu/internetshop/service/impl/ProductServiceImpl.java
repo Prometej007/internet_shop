@@ -72,24 +72,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductsByPageable( final List<Long> category,
-                                                 final List<Long> materials,
-                                                 final List<Integer> softness,
-                                                 final List<Integer> productType,
-                                                 final Boolean winterSummerOption,
-                                                 final BigDecimal minPrice,
-                                                 final BigDecimal maxPrice,
-                                                 final Double minHeight,
-                                                 final Double maxHeight,
-                                                 final Double minWidth,
-                                                 final Double maxWidth,
-                                                 final Double minLength,
-                                                 final Double maxLength,
-                                                 final Double minMaximumLoad,
-                                                 final Double maxMaximumLoad,
-                                                 final Pageable pageable ) {
+    public Page<Product> findProductsByPageable(final List<Long> category,
+                                                final List<Long> materials,
+                                                final List<Integer> softness,
+                                                final List<Integer> productType,
+                                                final Boolean winterSummerOption,
+                                                final BigDecimal minPrice,
+                                                final BigDecimal maxPrice,
+                                                final Double minHeight,
+                                                final Double maxHeight,
+                                                final Double minWidth,
+                                                final Double maxWidth,
+                                                final Double minLength,
+                                                final Double maxLength,
+                                                final Double minMaximumLoad,
+                                                final Double maxMaximumLoad,
+                                                final Pageable pageable) {
 
-        return productRepository.filter( category, materials, softness, productType, winterSummerOption, minPrice, maxPrice, minHeight, maxHeight, minWidth, maxWidth, minLength, maxLength, minMaximumLoad, maxMaximumLoad );
+        return productRepository.filter(category, materials, softness, productType, winterSummerOption, minPrice, maxPrice, minHeight, maxHeight, minWidth, maxWidth, minLength, maxLength, minMaximumLoad, maxMaximumLoad, pageable);
     }
 
     @Override
@@ -98,10 +98,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Boolean setAvailability( Long productId, boolean available ) {
-        Product product1 = findOne( productId );
-        product1.setAvailable( available );
-        save( product1 );
+    public Boolean setAvailability(Long productId, boolean available) {
+        Product product1 = findOne(productId);
+        product1.setAvailable(available);
+        save(product1);
         return true;
     }
 
